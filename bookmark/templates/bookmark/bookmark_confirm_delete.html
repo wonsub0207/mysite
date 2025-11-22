@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}북마크 삭제 확인{% endblock %}
+
+{% block head_extra %}
+<style>
+    .confirm-wrap { max-width:600px; margin:0 auto }
+    .confirm-card { background:white; border-radius:12px; padding:24px; box-shadow:0 10px 30px rgba(2,6,23,0.06) }
+    .confirm-icon { font-size:3rem; text-align:center; margin-bottom:16px }
+    .confirm-title { font-size:1.4rem; font-weight:800; text-align:center; color:#0b1220 }
+    .confirm-msg { text-align:center; color:#6b7280; margin-top:12px; line-height:1.6 }
+    .actions { display:flex; gap:10px; justify-content:center; margin-top:20px }
+    .btn { padding:10px 16px; border-radius:10px; font-weight:700; text-decoration:none; cursor:pointer; border:none }
+    .btn-danger { background:linear-gradient(90deg,#f5576c 0%,#f093fb 100%); color:white }
+    .btn-secondary { background:transparent; color:#374151; border:1px solid #e6e9ef }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="confirm-wrap">
+    <div class="confirm-card">
+        <div class="confirm-icon">⚠️</div>
+        <h1 class="confirm-title">정말 이 북마크를 삭제하시겠어요?</h1>
+        <p class="confirm-msg">
+            <strong>"{{ object.site_name }}"</strong><br>
+            한 번 삭제하면 복구할 수 없습니다.
+        </p>
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="actions">
+                <button type="submit" class="btn btn-danger">삭제하기</button>
+                <a href="{% url 'list' %}" class="btn btn-secondary">취소</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

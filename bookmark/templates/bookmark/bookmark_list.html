@@ -4,13 +4,14 @@
 
 {% block head_extra %}
 <style>
-    .header { text-align: center; color: green; margin-bottom: 24px }
-    .header h1 { font-size: 2.1rem; margin-bottom:6px; text-shadow:1px 1px 3px rgba(24, 170, 80, 0.15) }
+    .header { text-align: center; color: rgba(21, 146, 48, 0.9); margin-bottom: 24px }
+    .header h1 { font-size: 2.1rem; margin-bottom:6px; text-shadow:1px 1px 3px rgba(0,0,0,0.15) }
     .add-btn { display:inline-block; background: linear-gradient(135deg,#f093fb 0%,#f5576c 100%); color:white; padding:10px 18px; border-radius:50px; text-decoration:none; font-weight:600 }
     .bookmark-list{ list-style:none; }
-    .bookmark-item{ background:white; border-radius:10px; padding:16px; margin-bottom:12px; box-shadow:0 2px 10px rgba(0,0,0,0.08) }
-    .bookmark-link{ color:var(--accent1); text-decoration:none; font-weight:700 }
-    .empty-message{ text-align:center; padding:28px; color:black; }
+    .bookmark-item{ background:white; border-radius:10px; padding:16px; margin-bottom:12px; box-shadow:0 2px 10px rgba(0,0,0,0.08); display:flex; justify-content:space-between; align-items:center }
+    .bookmark-link{ color:var(--accent1); text-decoration:none; font-weight:700; flex:1 }
+    .bookmark-delete{ color:#f5576c; text-decoration:none; font-weight:700; padding:6px 10px; border-radius:6px; background:rgba(245,87,108,0.1); margin-left:8px }
+    .empty-message{ text-align:center; padding:28px; color:rgba(21, 146, 48, 0.9); }
 </style>
 {% endblock %}
 
@@ -18,7 +19,7 @@
 <div class="container">
     <div class="header">
         <h1>📚 나의 북마크</h1>
-        <p style="color:rgba(16, 131, 41, 0.9)">즐겨찾는 웹사이트를 한곳에서 관리하세요</p>
+        <p style="color:rgba(21, 146, 48, 0.9)">즐겨찾는 웹사이트를 한곳에서 관리하세요</p>
     </div>
 
     <div style="text-align:center;margin-bottom:20px;">
@@ -30,6 +31,7 @@
             {% for bookmark in object_list %}
                 <li class="bookmark-item">
                     <a href="{{ bookmark.url }}" target="_blank" class="bookmark-link">{{ bookmark.site_name }}</a>
+                    <a href="{% url 'delete' bookmark.pk %}" class="bookmark-delete">삭제</a>
                 </li>
             {% endfor %}
         </ul>
@@ -37,7 +39,7 @@
         <div class="empty-message">
             <div style="font-size:2rem;margin-bottom:8px;">📭</div>
             <p>아직 저장된 북마크가 없습니다.</p>
-            <p style="margin-top:10px;"><a href="{% url 'add' %}" style="color:black;text-decoration:underline">첫 번째 북마크 추가하기</a></p>
+            <p style="margin-top:10px;"><a href="{% url 'add' %}" style="color:rgba(21, 146, 48, 0.9);text-decoration:underline">첫 번째 북마크 추가하기</a></p>
         </div>
     {% endif %}
 </div>

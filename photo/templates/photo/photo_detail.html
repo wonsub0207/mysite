@@ -1,17 +1,22 @@
 {% extends 'base.html' %}
 
-{% block content %}
+{% block head_extra %}
 <style>
-    .photo-wrap { max-width:900px; margin:20px auto; padding:22px 14px; }
-    .card { background:white; border-radius:12px; padding:20px; box-shadow:0 10px 30px rgba(2,6,23,0.06); }
-    .title { font-size:1.8rem; font-weight:800; }
-    .meta { color:#6b7280; margin-top:8px; }
-    .img-full { width:100%; max-height:600px; object-fit:contain; border-radius:8px; margin-top:16px; }
-    .desc { margin-top:14px; line-height:1.75; color:#374151; }
-    .back { display:inline-block; margin-top:16px; text-decoration:none; color:#374151; font-weight:700; padding:8px 12px; border-radius:8px; background:rgba(2,6,23,0.03); }
+    .photo-wrap { max-width:900px; margin:0 auto }
+    .card { background:white; border-radius:12px; padding:20px; box-shadow:0 10px 30px rgba(2,6,23,0.06) }
+    .title { font-size:1.8rem; font-weight:800 }
+    .meta { color:#6b7280; margin-top:8px }
+    .img-full { width:100%; max-height:600px; object-fit:contain; border-radius:8px; margin-top:16px }
+    .desc { margin-top:14px; line-height:1.75; color:#374151 }
+    .actions { display:flex; gap:8px; margin-top:16px }
+    .btn { display:inline-block; text-decoration:none; font-weight:700; padding:8px 12px; border-radius:8px; border:none; cursor:pointer }
+    .btn-back { color:#374151; background:rgba(2,6,23,0.03) }
+    .btn-delete { background:linear-gradient(90deg,#f5576c 0%,#f093fb 100%); color:white }
     @media(max-width:640px){ .img-full{ max-height:320px } }
 </style>
+{% endblock %}
 
+{% block content %}
 <div class="photo-wrap">
     <div class="card">
         <div class="title">{{ object.title }}</div>
@@ -25,7 +30,10 @@
             <div class="desc">{{ object.description }}</div>
         {% endif %}
 
-        <a href="{% url 'photo_list' %}" class="back">← 목록으로</a>
+        <div class="actions">
+            <a href="{% url 'photo_list' %}" class="btn btn-back">← 목록으로</a>
+            <a href="{% url 'photo_delete' object.pk %}" class="btn btn-delete">삭제</a>
+        </div>
     </div>
 </div>
 
