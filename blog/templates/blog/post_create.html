@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}새 글 쓰기{% endblock %}
+
+{% block head_extra %}
+<style>
+    .page-title { font-size:1.6rem; font-weight:800 }
+    .subtitle { color:#6b7280; }
+    .card { background:white; border-radius:12px; padding:24px; box-shadow:0 10px 30px rgba(2,6,23,0.06); }
+    form p { margin-bottom:12px }
+    form label{ display:block; font-weight:700; margin-bottom:6px }
+    input[type=text], textarea { width:100%; padding:10px 12px; border:1px solid #e6e9ef; border-radius:8px }
+    .form-actions{ margin-top:14px; display:flex; gap:10px; flex-wrap:wrap }
+    .btn { padding:10px 16px; border-radius:10px; font-weight:700; background:linear-gradient(90deg,#06b6d4 0%,#10b981 100%); color:white; border:none }
+    .ghost{ background:transparent; color:#374151; border:1px solid #e6e9ef }
+    .help{ font-size:0.9rem; color:#6b7280; margin-top:6px }
+    @media(max-width:640px){ .card{ padding:16px } .page-title{ font-size:1.25rem } }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="card">
+        <div class="d-flex justify-content-between align-items-start mb-3">
+            <div>
+                <div class="page-title">✏️ 새 글 작성</div>
+                <div class="subtitle">타이틀과 내용을 입력한 뒤 저장하세요</div>
+            </div>
+            <div>
+                <a href="{% url 'list' %}" class="ghost">목록으로</a>
+            </div>
+        </div>
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <div class="help">Tip: 내용을 입력할 때 엔터로 줄바꿈을 넣으면 상세 페이지에서 그대로 표시됩니다.</div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn">저장하기</button>
+                <a href="{% url 'list' %}" class="ghost">취소</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

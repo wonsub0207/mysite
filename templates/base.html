@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{% block title %}My Site{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root{ --bg:#f8fafc; --card:#ffffff; --muted:#6b7280; --accent1:#667eea; --accent2:#764ba2; }
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;background:linear-gradient(135deg,var(--bg),#eef2ff);color:#0f172a;min-height:100vh}
+        .site-wrap{max-width:1100px;margin:0 auto;padding:28px 16px}
+        header.site-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
+        .brand{display:flex;align-items:center;gap:12px}
+        .brand .logo{font-size:1.4rem;font-weight:800}
+        nav.site-nav a{margin-left:12px;color:#374151;text-decoration:none;font-weight:700}
+        .card{background:var(--card);border-radius:12px;padding:18px;box-shadow:0 8px 30px rgba(2,6,23,0.04)}
+        .container{max-width:1000px;margin:0 auto}
+        footer.site-footer{margin-top:36px;padding:18px 0;color:var(--muted);font-size:0.95rem;text-align:center}
+        a.btn-primary-custom{display:inline-block;padding:8px 12px;border-radius:8px;text-decoration:none;color:white;background:linear-gradient(90deg,var(--accent1),var(--accent2));font-weight:700}
+        @media(max-width:640px){ .site-wrap{padding:18px} }
+    </style>
+    {% block head_extra %}{% endblock %}
+</head>
+<body>
+    <div class="site-wrap">
+        <header class="site-header">
+            <div class="brand">
+                <div class="logo">MySite</div>
+                
+            </div>
+            <nav class="site-nav">
+                <a href="/blog/">블로그</a>
+                <a href="/photo/">포토</a>
+                <a href="/bookmark/">북마크</a>
+            </nav>
+        </header>
+
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+
+        <footer class="site-footer">
+            © {{ year|default:2025 }} MySite — 간단한 프로젝트 템플릿
+        </footer>
+    </div>
+</body>
+</html>

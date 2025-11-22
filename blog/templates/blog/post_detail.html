@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ object.title }}{% endblock %}
+
+{% block head_extra %}
+<style>
+    .post-card { background: white; border-radius: 12px; padding: 28px; box-shadow: 0 8px 30px rgba(15, 23, 42, 0.06); }
+    .post-title { font-size: 1.9rem; font-weight: 800; color: #0b1220; }
+    .post-meta { color: #6b7280; margin-top: 6px; }
+    .post-content { margin-top: 14px; line-height: 1.85; color: #374151; white-space: pre-wrap; }
+    .back-link { display: inline-block; margin-top: 20px; text-decoration: none; color: #374151; font-weight: 700; padding: 8px 12px; border-radius: 8px; background: rgba(15,23,42,0.03); }
+    @media (max-width: 640px) { .post-card { padding: 18px; } .post-title { font-size: 1.4rem; } }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="post-card">
+        <div class="post-header">
+            <div class="post-title">{{ object.title }}</div>
+            <div class="post-meta">작성일: {{ object.created_at }}</div>
+        </div>
+
+        <div class="post-content">
+            {{ object.content|linebreaks }}
+        </div>
+
+        <a href="{% url 'list' %}" class="back-link">← 목록으로 돌아가기</a>
+    </div>
+</div>
+{% endblock %}

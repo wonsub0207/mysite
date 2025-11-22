@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}사진 올리기{% endblock %}
+
+{% block head_extra %}
+<style>
+    .wrap { max-width:820px; margin:0 auto }
+    .card { background:white; border-radius:12px; padding:20px; box-shadow:0 10px 30px rgba(2,6,23,0.06) }
+    .page-title { font-size:1.5rem; font-weight:800 }
+    .subtitle { color:#6b7280; margin-top:6px }
+    form p { margin-bottom:12px }
+    form label { display:block; font-weight:700; margin-bottom:6px }
+    input[type=file], input[type=text] { width:100%; padding:10px 12px; border:1px solid #e6e9ef; border-radius:8px }
+    .actions { margin-top:14px; display:flex; gap:10px; flex-wrap:wrap }
+    .btn { padding:10px 14px; border-radius:10px; font-weight:700; background:linear-gradient(90deg,#06b6d4 0%,#10b981 100%); color:white; text-decoration:none; border:none; cursor:pointer }
+    .ghost { background:transparent; color:#374151; border:1px solid #e6e9ef; box-shadow:none }
+    .help { font-size:0.9rem; color:#6b7280; margin-top:8px }
+    @media(max-width:640px) { .card { padding:16px } .page-title { font-size:1.25rem } }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="wrap">
+    <div class="card">
+        <div class="page-title">📸 사진 올리기</div>
+        <div class="subtitle">이미지 파일과 간단한 제목/설명을 입력하세요.</div>
+
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <div class="help">허용 파일: jpg, png. 용량 제한은 서버 설정에 따릅니다.</div>
+
+            <div class="actions">
+                <button type="submit" class="btn">업로드</button>
+                <a href="{% url 'photo_list' %}" class="btn ghost">취소</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}블로그 목록{% endblock %}
+
+{% block head_extra %}
+<style>
+    .header { display:flex; align-items:center; justify-content:space-between; margin-bottom: 24px; }
+    .title { font-size: 1.8rem; font-weight: 800; color: #0f172a; }
+    .subtitle { color: #6b7280; font-size: 0.95rem; }
+    .write-btn { background: linear-gradient(90deg, #10b981 0%, #06b6d4 100%); color: white; padding: 10px 16px; border-radius: 10px; text-decoration: none; font-weight: 700; }
+    .posts { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    .post-card { background: white; border-radius: 12px; padding: 18px; box-shadow: 0 6px 24px rgba(2,6,23,0.06); transition: transform 0.18s ease, box-shadow 0.18s ease; }
+    .post-card:hover { transform: translateY(-6px); box-shadow: 0 14px 40px rgba(2,6,23,0.08); }
+    .post-title { font-size: 1.25rem; font-weight: 700; color: #0b1220; text-decoration: none; }
+    .post-meta { color: #6b7280; font-size: 0.9rem; margin-top: 6px; }
+    .post-excerpt { margin-top: 10px; color: #374151; line-height: 1.6; }
+    .empty { text-align:center; padding: 40px; color: #475569; }
+    @media (min-width: 720px) { .posts { grid-template-columns: 1fr 1fr; } }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="header">
+        <div>
+            <div class="title">📝 내 블로그</div>
+            <div class="subtitle">최근 작성한 글을 확인하세요</div>
+        </div>
+        <div>
+            <a href="{% url 'write' %}" class="write-btn">+ 새 글 쓰기</a>
+        </div>
+    </div>
+
+    {% if object_list %}
+        <div class="posts">
+            {% for post in object_list %}
+                <article class="post-card">
+                    <a href="{% url 'detail' post.pk %}" class="post-title">{{ post.title }}</a>
+                    <div class="post-meta">{{ post.created_at }}</div>
+                    {% if post.content %}
+                        <div class="post-excerpt">{{ post.content|truncatechars:150|linebreaks }}</div>
+                    {% endif %}
+                </article>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="empty">
+            <div style="font-size:2.2rem; margin-bottom:10px;">📭</div>
+            <p>작성된 글이 없습니다.</p>
+            <p style="margin-top:12px;"><a href="{% url 'write' %}" class="write-btn">첫 글 작성하기</a></p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

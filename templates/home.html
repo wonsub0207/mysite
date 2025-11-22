@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}홈 - MySite{% endblock %}
+
+{% block head_extra %}
+<style>
+    .hero { text-align:center; padding:40px 20px; color:black; margin-bottom:28px }
+    .hero-title { font-size:2.4rem; font-weight:900; margin-bottom:8px }
+    .hero-sub { font-size:1.1rem; opacity:0.9 }
+    
+    .features { display:grid; grid-template-columns:repeat(1,1fr); gap:18px; max-width:1000px; margin:0 auto }
+    @media(min-width:768px) { .features { grid-template-columns:repeat(3,1fr) } }
+    
+    .feature-card { background:white; border-radius:12px; padding:22px; text-align:center; box-shadow:0 8px 24px rgba(2,6,23,0.08); transition:transform 0.2s }
+    .feature-card:hover { transform:translateY(-4px) }
+    .feature-icon { font-size:2.4rem; margin-bottom:10px }
+    .feature-title { font-size:1.1rem; font-weight:800; margin-bottom:8px; color:#0b1220 }
+    .feature-desc { color:#6b7280; font-size:0.95rem; line-height:1.6 }
+    .feature-link { display:inline-block; margin-top:10px; color:#667eea; font-weight:700; text-decoration:none }
+    .feature-link:hover { color:#764ba2 }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="hero">
+        <h1 class="hero-title">🎨 MySite</h1>
+       
+    </div>
+
+    <div class="features">
+        <!-- Blog Card -->
+        <div class="feature-card">
+            <div class="feature-icon">📝</div>
+            <h2 class="feature-title">블로그</h2>
+            <p class="feature-desc">다양한 주제로 글을 작성하고 공유해보세요. </p>
+            <a href="/blog/" class="feature-link">블로그 방문 →</a>
+        </div>
+
+        <!-- Photo Card -->
+        <div class="feature-card">
+            <div class="feature-icon">📸</div>
+            <h2 class="feature-title">포토 갤러리</h2>
+            <p class="feature-desc">소중한 순간들을 사진으로 기록하세요. </p>
+            <a href="/photo/" class="feature-link">갤러리 방문 →</a>
+        </div>
+
+        <!-- Bookmark Card -->
+        <div class="feature-card">
+            <div class="feature-icon">🔖</div>
+            <h2 class="feature-title">북마크</h2>
+            <p class="feature-desc">유용한 웹사이트들을 한곳에서 모아보세요. </p>
+            <a href="/bookmark/" class="feature-link">북마크 보기 →</a>
+        </div>
+    </div>
+
+    
+</div>
+{% endblock %}

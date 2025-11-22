@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}북마크 추가{% endblock %}
+
+{% block head_extra %}
+<style>
+    .page-title { font-size:1.5rem; font-weight:800 }
+    .subtitle { color:#6b7280; margin-top:6px }
+    .card { background:white; border-radius:12px; padding:20px; box-shadow:0 10px 30px rgba(2,6,23,0.06) }
+    form p { margin-bottom:12px }
+    form label{ display:block; font-weight:700; margin-bottom:6px }
+    input[type=text], input[type=url] { width:100%; padding:10px 12px; border:1px solid #e6e9ef; border-radius:8px }
+    .actions{ margin-top:14px; display:flex; gap:10px; flex-wrap:wrap }
+    .btn { padding:10px 14px; border-radius:10px; font-weight:700; background:linear-gradient(90deg,#f093fb 0%,#f5576c 100%); color:white; border:none; cursor:pointer }
+    .ghost{ background:transparent; color:#374151; border:1px solid #e6e9ef }
+    .help{ font-size:0.9rem; color:#6b7280; margin-top:8px }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width:820px">
+    <div class="card">
+        <div class="page-title">🔖 북마크 추가하기</div>
+        <div class="subtitle">웹사이트 주소와 이름을 입력하세요</div>
+
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <div class="help">Tip: 즐겨찾기 아이콘(⭐)으로 중요한 사이트를 표시할 수 있습니다.</div>
+
+            <div class="actions">
+                <button type="submit" class="btn">저장하기</button>
+                <a href="{% url 'list' %}" class="ghost">취소</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
