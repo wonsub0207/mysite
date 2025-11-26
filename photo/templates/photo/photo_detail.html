@@ -13,6 +13,13 @@
     .btn-back { color:#374151; background:rgba(2,6,23,0.03) }
     .btn-delete { background:linear-gradient(90deg,#f5576c 0%,#f093fb 100%); color:white }
     @media(max-width:640px){ .img-full{ max-height:320px } }
+    .comment-section{ margin-top:22px; padding-top:16px; border-top:1px solid #e5e7eb }
+    .comment-title{ font-weight:800; margin-bottom:10px; }
+    .comment-item{ padding:10px 12px; background:rgba(2,6,23,0.02); border-radius:8px; margin-bottom:10px; }
+    .comment-meta{ color:#6b7280; font-size:0.9rem; margin-bottom:4px; }
+    .comment-text{ color:#111827; white-space:pre-line; }
+    .comment-form .form-control{ width:100%; margin-bottom:10px; border-radius:8px; border:1px solid #e5e7eb; padding:10px 12px; }
+    .comment-form button{ background:linear-gradient(90deg,#667eea 0%,#764ba2 100%); color:white; border:none; padding:10px 14px; border-radius:10px; font-weight:700; cursor:pointer; width:100%; }
 </style>
 {% endblock %}
 
@@ -29,6 +36,27 @@
         {% if object.description %}
             <div class="desc">{{ object.description }}</div>
         {% endif %}
+
+        <div class="comment-section">
+            <div class="comment-title">댓글</div>
+            {% if comments %}
+                {% for comment in comments %}
+                    <div class="comment-item">
+                        <div class="comment-meta">{{ comment.name }} · {{ comment.created }}</div>
+                        <div class="comment-text">{{ comment.text }}</div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="comment-item" style="background:transparent;color:#6b7280;">아직 댓글이 없습니다.</div>
+            {% endif %}
+
+            <form method="post" class="comment-form" style="margin-top:12px;">
+                {% csrf_token %}
+                {{ comment_form.name }}
+                {{ comment_form.text }}
+                <button type="submit">댓글 남기기</button>
+            </form>
+        </div>
 
         <div class="actions">
             <a href="{% url 'photo_list' %}" class="btn btn-back">← 목록으로</a>
